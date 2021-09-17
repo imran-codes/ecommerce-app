@@ -1,19 +1,23 @@
 import React, {useState} from 'react'
 import { useSelector } from 'react-redux'
-import { selectItemsCount } from '../reducers/basketSlice'
+import { selectItemsCount } from '../../reducers/basketSlice'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
+import { selectProducts } from '../../reducers/productSlice'
+import SearchResults from '../SearchResults/SearchResults';
+import {Wrapper, ImageWrapper, SearchWrapper, Input, BasketWrapper, ResultsWrapper, ResultsInnerWrapper} from './Styles'
 
 
 function Header() {
   const numberOfItemsInBasket = useSelector(selectItemsCount);
+  console.log(numberOfItemsInBasket)
   const history = useHistory();
 
   const [searchInput, setSearchInput] = useState("");
   console.log(searchInput);
 
+  const products = useSelector(selectProducts);
 
   return (
     <Wrapper className = "header">
@@ -30,70 +34,40 @@ function Header() {
           <SearchIcon />
         </SearchWrapper> 
 
+
       <BasketWrapper onClick = {() => history.push("/basket")}>
         <ShoppingBasketIcon />
         <p>{numberOfItemsInBasket} </p>
       </BasketWrapper>
     
+    
+    <ResultsWrapper>
+      {
+            searchInput && (
+              <ResultsInnerWrapper>
+                <h2>Add products to your basket</h2>
+              {
+              products && products
+                .filter((product) => product.title.toLowerCase().includes(searchInput))
+                .map((product) => (
+                  <SearchResults
+                  key = {product.id}
+                  id ={product.id}
+                  image = {product.image}
+                  title = {product.title}
+                  price = {product.price}
+                  quantity = {product.quantity}
+                  />
+                ))
+              }
+                </ResultsInnerWrapper>
+            )
+          }
+
+    </ResultsWrapper>
     </Wrapper>
   )
 }
 
 export default Header
-
-const Wrapper = styled.div ` 
-  display: flex;
-  justify-content: space-between;
-  margin: 0 200px;
-  padding: 5px;
-  max-height: 100px;
-
-  p {
-    cursor: pointer;
-  }
-
-  @media (max-width: 1416px) {
-    margin: 0 100px;
-}
-@media (max-width: 1220px) {
-    margin: 0 10px;
-}
-`
-
-const BasketWrapper = styled.div `
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`
-const ImageWrapper = styled.div `
-  
-  img {
-    width: 150px;
-    cursor: pointer;
-  }
-`
-
-const SearchWrapper = styled.div `
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 20px 0;
-  border: 2px solid lightgrey;
-  padding: 5px 15px;
-  border-radius: 20px;
-  width: 300px;
-  
-  
-  `
-
-const Input = styled.input `
-  flex: 1;
-  padding: 5px;
-  outline: none;
-
- 
-
-`
 
