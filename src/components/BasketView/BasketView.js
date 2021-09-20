@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Wrapper , CloseWrapper , InfoWrapper , QuantityWrapper} from './Styles';
 
-function BasketView({title, price, id, quantity}) {
+function BasketView({title, price, id, quantity, image}) {
   const dispatch = useDispatch();
 
   const removeItemFromBasket = () => {
