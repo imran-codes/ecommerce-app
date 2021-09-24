@@ -4,7 +4,7 @@ export const Wrapper = styled.div `
   /* display: flex;
   justify-content: space-between; */
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   justify-content: center;
   padding: 5px;
   max-height: 100px;
@@ -26,14 +26,6 @@ export const Wrapper = styled.div `
 }
 `
 
-export const BasketWrapper = styled.div `
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-right: 25px;
-`
 export const ImageWrapper = styled.div `
 display: flex;
 justify-content: center;
@@ -54,6 +46,7 @@ justify-content: center;
 
 export const SearchWrapper = styled.div `
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   margin: 20px 0;
@@ -120,52 +113,5 @@ export const CloseWrapper = styled.div `
 
 
 `
-
-
-export const CheckoutView = styled.div `
-  
-  `
-
-export const Sidebar = styled.div `
-position: fixed;
-top: 0;
-bottom: 0;
-right: 0;
-background-color: white;
-max-width: 600px;
-z-index: 12;
-padding: 20px;
-box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-transition: 850ms;
-transform: ${props => props.show ? 'translateX(0%)' : 'translateX(100%)' };
-
-`
-
-export const CloseWrapperBasket = styled.div `
-justify-content: flex-end;
-display: flex;
-align-items: center;
-padding: 6px;
-margin-right: 8px;
-cursor: pointer;
-
-.MuiSvgIcon-root {
-  color: red !important;
-  font-size: 22px !important;
-  font-weight: bolder !important;
-}
-
-`
-
-export const ButtonWrapper = styled.div`
-
-.MuiButton-containedPrimary {
-width: 100% !important;
-margin-top: 10px;
-}
-
-`
-
-
 
 

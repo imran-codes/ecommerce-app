@@ -1,10 +1,15 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div `
-  padding: 10px 0;
+  padding: 10px 10px;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: lightgray;
+  }
 
   @media (max-width: 1024px) {
     display: flex;
@@ -27,7 +32,7 @@ export const QuantityWrapper = styled.div`
 `
 
 export const CloseWrapper = styled.div `
-
+  cursor: pointer;
 .MuiSvgIcon-root {
     fill: red !important;
     
@@ -60,4 +65,9 @@ margin-left: 35px;
     
   }
   }
+`
+
+export const ImageWrapper = styled.div `
+
+
 `

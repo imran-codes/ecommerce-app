@@ -9,7 +9,6 @@ function Basket() {
   const items = useSelector(selectItems);
   const totalPrice = useSelector(selectBasketTotal);
   const totalItemsInBasket = useSelector(selectItemsCount)
-  
 
   return (
     <Wrapper>
@@ -19,13 +18,14 @@ function Basket() {
           <>
             <p>Total: £{totalPrice.toFixed(2)}</p>
             <p>Total items in your basket: {totalItemsInBasket} </p>
-
+            
             {items.map(item => (
               <BasketView 
               key = {item.id} 
               title = {item.title}
               price = {item.price}
               id = {item.id} 
+              image = {item.image}
               quantity = {item.quantity}/>
             ))}
           </>

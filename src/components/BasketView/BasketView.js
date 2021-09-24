@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux'
 import { removeFromBasket, addToBasket, deleteFromBasket } from '../../reducers/basketSlice'
 import { Button } from '@material-ui/core';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Wrapper , CloseWrapper , InfoWrapper , QuantityWrapper} from './Styles';
+import {Wrapper , CloseWrapper , InfoWrapper , QuantityWrapper, ImageWrapper} from './Styles';
 
 function BasketView({title, price, id, quantity, image}) {
+  console.log('image', image)
   const dispatch = useDispatch();
 
   const removeItemFromBasket = () => {
@@ -15,7 +16,7 @@ function BasketView({title, price, id, quantity, image}) {
 
   const addItem = () => {
     const productToAdd = {
-      id, title, price, quantity
+      id, title, price, quantity, image
     }
     dispatch(addToBasket(productToAdd))
   }
@@ -29,6 +30,9 @@ function BasketView({title, price, id, quantity, image}) {
       <CloseWrapper onClick = {deleteItemFromBasket}>
       <DeleteIcon />
       </CloseWrapper>
+      <ImageWrapper>
+        <img src={image} alt="" />
+      </ImageWrapper>
       <InfoWrapper>
       <p>{title}</p>
       <p><strong>£{price}</strong></p>

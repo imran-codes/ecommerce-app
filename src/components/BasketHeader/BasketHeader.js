@@ -1,20 +1,16 @@
 import React, {useState} from 'react'
 import { useSelector } from 'react-redux'
-import { selectItemsCount, selectItems, selectBasketTotal } from '../../reducers/basketSlice'
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { selectItemsCount} from '../../reducers/basketSlice'
 import { useHistory } from 'react-router-dom'
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { selectProducts } from '../../reducers/productSlice'
 import SearchResults from '../SearchResults/SearchResults';
-import {Wrapper, ImageWrapper, SearchWrapper, Input, BasketWrapper, ResultsWrapper, ResultsInnerWrapper, CloseWrapper, CheckoutView, Sidebar, CloseWrapperBasket, ButtonWrapper,  } from './Styles'
-import { Button } from '@material-ui/core';
-import BasketView from '../BasketView/BasketView';
+import {Wrapper, ImageWrapper, SearchWrapper, Input, ResultsWrapper, ResultsInnerWrapper, CloseWrapper} from './Styles'
 
 
 function Header() {
   const numberOfItemsInBasket = useSelector(selectItemsCount);
-  const totalPrice = useSelector(selectBasketTotal);
   console.log(numberOfItemsInBasket)
   const history = useHistory();
 
@@ -27,9 +23,6 @@ function Header() {
     setSearchInput("");
   }
 
-  const items = useSelector(selectItems);
-
-  const [sidebar, setSidebar] = useState(false);
 
   
 
@@ -52,14 +45,6 @@ function Header() {
           <SearchIcon />
         </SearchWrapper> 
 
-
-      <BasketWrapper onClick = {
-      () => setSidebar(!sidebar)
-      }>
-        <ShoppingBasketIcon />
-        <p>{numberOfItemsInBasket} </p>
-      </BasketWrapper>
-    
     
     <ResultsWrapper>
       {
@@ -84,33 +69,6 @@ function Header() {
             )
       }
     </ResultsWrapper>
-
-    {/* ADD BASKET SIDEBAR COMPONENT */}
-
-      <CheckoutView>    
-      <Sidebar show = {sidebar}>
-              <CloseWrapperBasket>
-                <CloseIcon onClick = { () => setSidebar(false)} />
-              </CloseWrapperBasket> 
-            <h1>Your Basket</h1>
-              <p>Total: £{totalPrice.toFixed(2)}</p>
-              <p>Total items in your basket: {numberOfItemsInBasket} </p>
-
-              {items.map(item => (
-                <BasketView 
-                key = {item.id} 
-                title = {item.title}
-                price = {item.price}
-                id = {item.id} 
-                quantity = {item.quantity}
-                image = {item.image}/>
-              ))}
-
-        <ButtonWrapper onClick = {() => history.push("/basket")}>
-        <Button variant="contained" color="primary">Go to Checkout</Button>
-        </ButtonWrapper>
-        </Sidebar>
-    </CheckoutView> 
     
     </Wrapper>
   )
