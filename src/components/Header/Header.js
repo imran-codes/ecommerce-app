@@ -10,7 +10,7 @@ import SearchResults from '../SearchResults/SearchResults';
 import {Wrapper, ImageWrapper, SearchWrapper, Input, BasketWrapper, ResultsWrapper, ResultsInnerWrapper, CloseWrapper, CheckoutView, Sidebar, CloseWrapperBasket, ButtonWrapper,  } from './Styles'
 import { Button } from '@material-ui/core';
 import BasketView from '../BasketView/BasketView';
-import { showSidebar, hideSidebar } from '../../reducers/sidebarSlice'
+import { toggleSidebar } from '../../reducers/sidebarSlice'
 
 
 function Header() {
@@ -32,14 +32,10 @@ function Header() {
 
   const dispatch = useDispatch()
 
-  const [sidebar, setSidebar] = useState(false);
+  const {sidebar} = useSelector(state => state.sidebar);
 
-  const closeSidebar = () => {
-    dispatch(hideSidebar())
-  }
-  
-  const showBasketSidebar = () => {
-    dispatch(showSidebar())
+  const toggleSidebarMenu = () => {
+    dispatch(toggleSidebar())
   }
   
 
@@ -63,8 +59,7 @@ function Header() {
         </SearchWrapper> 
 
 
-      <BasketWrapper onClick = {showBasketSidebar   
-      }>
+      <BasketWrapper onClick = {toggleSidebarMenu}>
         <ShoppingBasketIcon />
         <p>{numberOfItemsInBasket} </p>
       </BasketWrapper>
@@ -97,9 +92,9 @@ function Header() {
     {/* ADD BASKET SIDEBAR COMPONENT */}
 
       <CheckoutView>    
-      <Sidebar show = {sidebar ? showBasketSidebar : closeSidebar} >
+      <Sidebar show = {sidebar}>
               <CloseWrapperBasket>
-                <CloseIcon onClick = {closeSidebar} />
+                <CloseIcon onClick = {toggleSidebarMenu} />
               </CloseWrapperBasket> 
             <h1>Your Basket</h1>
               <p>Total: £{totalPrice.toFixed(2)}</p>
